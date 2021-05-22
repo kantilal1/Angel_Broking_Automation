@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test verbose="2" name="Default test">
+    <classes>
+      <class name="orange.crm.Utility.OrangeCRMPropertiesFileReader"/>
+      <class name="orange.crm.orangestepdefination.OrangeDriver"/>
+      <class name="orange.crm.Utility.BrowserUtility"/>
+      <class name="orange.crm.Utility.EzxcelHandlerDemo"/>
+      <class name="orange.crm.Utility.PropertiesFileReader"/>
+      <class name="orange.crm.Utility.TestDataHandler"/>
+      <class name="orange.crm.Utility.ExcellReader"/>
+      <class name="orange.crm.Listeners.ITestListenerImpl"/>
+      <class name="orange.crm.CRMRunner.CRMRunner"/>
+      <class name="orange.crm.Listeners.ExtentReportListener"/>
+    </classes>
+  </test> <!-- Default test -->
+</suite> <!-- Failed suite [Default suite] -->
