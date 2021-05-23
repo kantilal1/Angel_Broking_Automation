@@ -58,6 +58,7 @@ public class ExtentReportListener {
             extenttest.fail(MarkupHelper.createLabel("Test Case is Failed : ", ExtentColor.RED));
             extenttest.error(throwable.fillInStackTrace());
 
+
             try {
                 extenttest.addScreenCaptureFromPath(captureScreenShot(driver));
             } catch (IOException e) {

@@ -2,6 +2,8 @@ package angel.Utility;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Platform;
@@ -14,6 +16,9 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.aventstack.extentreports.ExtentTest;
+
+import angel.stepdefination.AngelDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BrowserUtility {
@@ -77,6 +82,16 @@ public class BrowserUtility {
 
         }
         return null;
+    }
+	
+    public static String getDate() throws MalformedURLException {
+        String strDate = null;
+        	 Date date = new Date();  
+ 		    SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy");  
+ 		     strDate= formatter.format(date);  
+ 		    System.out.println("strDate==>" +strDate); 
+
+		return strDate;		
     }
 
 }

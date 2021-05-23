@@ -1,11 +1,18 @@
 package angel.stepdefination;
 
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,6 +53,7 @@ public class AngelDriver extends ExtentReportListener{
 	    public static String testcaseId;
 	    public static String scenarioNames;
 	    public static String stepDescription;
+	    public static String textValue;
 	    
 	    SoftAssert soft = new SoftAssert();
 
@@ -157,6 +165,23 @@ public class AngelDriver extends ExtentReportListener{
 	        }
 	    }
 	   
+	   
+	   @Then("Click on specific element {string} {string}")
+	    public void clickOnSpecificElement(String locator, String value) throws MalformedURLException {
+	        ExtentTest logInfo = null;
+	        try {
+	            logInfo = object.logsHandlerWeb(stepDescription, "Click On", webDriver);
+	           int i= Integer.parseInt(value);
+	            List<WebElement> elt = object.locatorsfetchList(locator, webDriver, filePath, sheetName);
+	            WebDriverWait wait = new WebDriverWait(webDriver, 30);
+	            WebElement elt1 = wait.until(ExpectedConditions.elementToBeClickable(elt.get(i)));
+	            elt1.click();
+	            Thread.sleep(5000);
+	        } catch (AssertionError | Exception e) {
+	            testStepHandle("FAIL", webDriver, logInfo, e);
+	        }
+	    }
+	   
 	   @Then("JSClick on element {string}")
 	    public void jsClickOnElement(String locator) throws MalformedURLException {
 	        ExtentTest logInfo = null;
@@ -194,15 +219,86 @@ public class AngelDriver extends ExtentReportListener{
 	            WebElement elt = object.locatorsfetch(locator, webDriver, filePath, sheetName);
 	            WebDriverWait wait = new WebDriverWait(webDriver, 30);
 	            WebElement elt1 = wait.until(ExpectedConditions.visibilityOf(elt));
-	            System.out.println("Get Text===>" +elt1.getText());
-	            System.out.println("Value===>" +value);
-	            System.out.println("App test data===>" +appTestData.get(value));
+	           // System.out.println("Get Text===>" +elt1.getText());
 	            soft.assertEquals(elt1.getText(), appTestData.get(value), "The user is not redirect to the "+value+" Page ");
 	            soft.assertAll();
 	        } catch (AssertionError | Exception e) {
 	            testStepHandle("FAIL", webDriver, logInfo, e);
 	        }
 	    }
+	   
+	   @Then("Wait for element")
+	    public void waitToElment() throws MalformedURLException {
+	        ExtentTest logInfo = null;
+	        try {
+	            logInfo = object.logsHandlerWeb(stepDescription, "Wait", webDriver);
+	            Thread.sleep(7000);
+	        } catch (AssertionError | Exception e) {
+	            testStepHandle("FAIL", webDriver, logInfo, e);
+	        }
+	    }
+	   
+	   @Then("Get Text from element {string}")
+	    public void getTextWebelement(String locator) throws MalformedURLException {
+	        ExtentTest logInfo = null;
+	        try {
+	            logInfo = object.logsHandlerWeb(stepDescription, "Get Text", webDriver);
+	            WebElement elt = object.locatorsfetch(locator, webDriver, filePath, sheetName);
+	            WebDriverWait wait = new WebDriverWait(webDriver, 30);
+	            WebElement elt1 = wait.until(ExpectedConditions.visibilityOf(elt));
+	         //   System.out.println("Get Text===>" +elt1.getAttribute("value"));
+	            String text =elt1.getAttribute("value");
+	            soft.assertEquals(text, BrowserUtility.getDate(), "The "+text+" is not matched");
+	            soft.assertAll();
+	   
+	        } catch (AssertionError | Exception e) {
+	            testStepHandle("FAIL", webDriver, logInfo, e);
+	        }
+	    }
+
+	   @Then("Get Text from list of element {string} {string}")
+	    public void getTextWebelements(String locator, String value) throws MalformedURLException {
+	        ExtentTest logInfo = null;
+	       int i= Integer.parseInt(value);
+	        try {
+	            logInfo = object.logsHandlerWeb(stepDescription, "Get Text", webDriver);
+	            List<WebElement> elt = object.locatorsfetchList(locator, webDriver, filePath, sheetName);
+	            WebDriverWait wait = new WebDriverWait(webDriver, 30);
+	            WebElement elt1 = wait.until(ExpectedConditions.visibilityOf(elt.get(i)));
+	          //  System.out.println("Get Text===>" +elt1.getAttribute("innerHTML"));
+	            textValue =elt1.getAttribute("innerHTML");
+	   
+	        } catch (AssertionError | Exception e) {
+	            testStepHandle("FAIL", webDriver, logInfo, e);
+	        }
+	    }
+
+	   @Then("Switch to parent window")
+	    public void switchToWindow() throws MalformedURLException {
+	        ExtentTest logInfo = null;
+
+	        try {
+	            String parentwindow = webDriver.getWindowHandle();
+	            webDriver.switchTo().window(parentwindow);
+	            System.out.println("Window switched to parent");
+	        } catch (AssertionError | Exception e) {
+	            testStepHandle("FAIL", webDriver, logInfo, e);
+	        }
+	    }
+	   
+	   @Then("Switch to child window {string}")
+	    public void switchToChildWindow(String value) throws MalformedURLException {
+	        ExtentTest logInfo = null;
+               int i =Integer.parseInt(value);
+	        try {
+	            ArrayList<String> childWindow = new ArrayList<String>(webDriver.getWindowHandles());	            
+	            webDriver.switchTo().window((childWindow.get(i)));
+	            System.out.println("Window switched to childWindow");
+	        } catch (AssertionError | Exception e) {
+	            testStepHandle("FAIL", webDriver, logInfo, e);
+	        }
+	    }
+
 
 	   @Then("Verify that the element is Present {string}")
 	    public void isElementPresent(String locator) throws MalformedURLException {
@@ -211,7 +307,8 @@ public class AngelDriver extends ExtentReportListener{
 	            logInfo = object.logsHandlerWeb(stepDescription, "Get Text", webDriver);
 	            WebElement elt = object.locatorsfetch(locator, webDriver, filePath, sheetName);
 	            WebDriverWait wait = new WebDriverWait(webDriver, 30);
-	            WebElement elt1 = wait.until(ExpectedConditions.visibilityOf(elt));
+	            System.out.println("Verifying1");
+	            WebElement elt1 = wait.until(ExpectedConditions.elementToBeClickable(elt));
 	            System.out.println("Get Text===>" +elt1.getText());
 	            soft.assertTrue(elt1.isDisplayed(), "The "+elt1.getText()+" element is not displayed");
 	            soft.assertAll();
@@ -219,6 +316,21 @@ public class AngelDriver extends ExtentReportListener{
 	            testStepHandle("FAIL", webDriver, logInfo, e);
 	        }
 	    }
-
-
+	   
+	   @Then("Pass the value in field {string}")
+	    public void passTheValue(String locator) throws MalformedURLException {
+	        ExtentTest logInfo = null;
+	        try {
+	            logInfo = object.logsHandlerWeb(stepDescription, "Pass value", webDriver);
+	            WebElement elt = object.locatorsfetch(locator, webDriver, filePath, sheetName);
+	            WebDriverWait wait = new WebDriverWait(webDriver, 30);
+	            WebElement elt1 = wait.until(ExpectedConditions.elementToBeClickable(elt));
+	            elt1.sendKeys(textValue);
+	        } catch (AssertionError | Exception e) {
+	            testStepHandle("FAIL", webDriver, logInfo, e);
+	        }
+	    }
+    
+	
+	   
 }

@@ -171,8 +171,6 @@ public class WiniumHandler extends ExtentReportListener {
         // Properties properties = obj.getProperty();
 
         Map<String, String> TestDataInMap = ExcelHandler.getTestDataInMap(filePath, sheetName, rowid);
-        System.out.println("filePath" + filePath);
-        System.out.println("sheetName" + sheetName);
 
         String locatorValue = TestDataInMap.get("locatorValue");
 
