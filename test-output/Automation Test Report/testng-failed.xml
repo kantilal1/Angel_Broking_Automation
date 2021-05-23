@@ -9,4 +9,15 @@
       <class name="angel.Runner.AngelRunner"/>
     </classes>
   </test> <!-- Automation Test Report -->
+  <test name="Automation Test Report(failed)">
+    <classes>
+      <class name="angel.Runner.AngelRunner">
+        <methods>
+          <include name="tearDownClass"/>
+          <include name="feature" invocation-numbers="0"/>
+          <include name="setUpClass"/>
+        </methods>
+      </class> <!-- angel.Runner.AngelRunner -->
+    </classes>
+  </test> <!-- Automation Test Report(failed) -->
 </suite> <!-- Failed suite [Automation Test Report] -->

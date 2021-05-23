@@ -36,7 +36,7 @@ Feature: AngelBroking Login Test cases
      Then Click on specific element "Dates_Number" "1"      
      And The Below Step Description is "Click on Select Status"
      Then Click on element "Select_Status_Element"
-     And The Below Step Description is "Select Approved as status"
+     And The Below Step Description is "Select Pending for Scrutiny as status"
      Then Click on element "Status_Type_Element"
      And The Below Step Description is "Click on Search Button"
      Then Click on element "Search_Element"
@@ -56,7 +56,16 @@ Feature: AngelBroking Login Test cases
      Then Click on specific element "Application_Number" "0"  
      And The Below Step Description is "Switch to Child window"
      Then Switch to child window "1" 
+     And The Below Step Description is "Click on Approve IPV" 
+     Then Click on element if present "Approve_IPV_Element"
+     And The Below Step Description is "Click on Approve button"
+     Then Click on element "Approve_Element"
+
      
+     
+     
+     And The Below Step Description is "Click on Ok button from confirmation popup"
+     Then Accept the alert "Accept"
      
       
     #And The Below Step Description is "Close the Angel web application"

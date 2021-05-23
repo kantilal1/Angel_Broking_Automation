@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -165,6 +166,25 @@ public class AngelDriver extends ExtentReportListener{
 	        }
 	    }
 	   
+	   
+	   @Then("Click on element if present {string}")
+	    public void clickOnIfElementPresent(String locator) throws MalformedURLException {
+	        ExtentTest logInfo = null;
+	        try {
+	            logInfo = object.logsHandlerWeb(stepDescription, "Click On", webDriver);
+	            
+	            WebElement elt = object.locatorsfetch(locator, webDriver, filePath, sheetName);
+	            WebDriverWait wait = new WebDriverWait(webDriver, 30);
+	            WebElement elt1 = wait.until(ExpectedConditions.elementToBeClickable(elt));
+	            if(elt1.isDisplayed()){
+	            	elt1.click();
+	            }else{
+	            	System.out.println("Element is not present");
+	            }
+	        } catch (AssertionError | Exception e) {
+	            testStepHandle("FAIL", webDriver, logInfo, e);
+	        }
+	    }
 	   
 	   @Then("Click on specific element {string} {string}")
 	    public void clickOnSpecificElement(String locator, String value) throws MalformedURLException {
@@ -331,6 +351,26 @@ public class AngelDriver extends ExtentReportListener{
 	        }
 	    }
     
-	
+	   @Then("Accept the alert {string}")
+	    public void acceptAlert(String value) throws MalformedURLException {
+	        ExtentTest logInfo = null;
+	        try {
+	            logInfo = object.logsHandlerWeb(stepDescription, "Accept Alert", webDriver);
+	           Alert alert =  webDriver.switchTo().alert();
+
+	           if(value.equalsIgnoreCase("Accept")){	        	   
+	        	   
+	           } else if(value.equalsIgnoreCase("Reject")){
+	        	   
+	           }else if(value.equalsIgnoreCase("Print")){
+	        	   
+	           }else{
+	        	   System.out.println("Alert is present");
+	           }
+	           
+	        } catch (AssertionError | Exception e) {
+	            testStepHandle("FAIL", webDriver, logInfo, e);
+	        }
+	    }
 	   
 }

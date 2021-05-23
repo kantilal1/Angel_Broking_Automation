@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Automation Test Report</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sun May 23 15:57:58 IST 2021</td>
+<td>Started on:</td><td>Sun May 23 21:57:22 IST 2021</td>
 </tr>
-<tr><td>Total time:</td><td>95 seconds (95605 ms)</td>
+<tr><td>Total time:</td><td>95 seconds (95199 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,8 +67,8 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-passed'>
-<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td width="30%"><b>Exception</b></td>
 <td width="10%"><b>Time (seconds)</b></td>
@@ -76,8 +76,17 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='angel.Runner.AngelRunner.feature()'><b>feature</b><br>Test class: angel.Runner.AngelRunner<br>Parameters: "TC001", "AngelBroking Login Test cases"</td>
-<td></td>
-<td>95</td>
+<td><div><pre>java.lang.NullPointerException
+	at angel.Listeners.ExtentReportListener.testStepHandle(ExtentReportListener.java:58)
+	at angel.stepdefination.AngelDriver.clickOnElement(AngelDriver.java:165)
+	at ?.Click on element &quot;Approve_Element&quot;(./Angel_Broking/Angel/TestCases/AngelLogin.feature:62)
+</pre></div><a href='#' onClick='toggleBox("stack-trace745966298", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace745966298'><pre>java.lang.NullPointerException
+	at angel.Listeners.ExtentReportListener.testStepHandle(ExtentReportListener.java:58)
+	at angel.stepdefination.AngelDriver.clickOnElement(AngelDriver.java:165)
+	at ?.Click on element &quot;Approve_Element&quot;(./Angel_Broking/Angel/TestCases/AngelLogin.feature:62)
+</pre></div></td>
+<td>94</td>
 <td>angel.Runner.AngelRunner@5ae9a829</td></tr>
 </table><p>
 </body>
